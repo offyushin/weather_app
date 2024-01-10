@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class CurrentTempTextWidget extends StatelessWidget {
-  const CurrentTempTextWidget({super.key});
+  final num temperature;
+
+  const CurrentTempTextWidget({super.key, required this.temperature});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         Text(
           '현재 온도',
@@ -13,7 +15,7 @@ class CurrentTempTextWidget extends StatelessWidget {
               color: Colors.black, fontSize: 35.0, fontWeight: FontWeight.w500),
         ),
         Text(
-          '-2',
+          '$temperature',
           style: TextStyle(
               color: Colors.black, fontSize: 50.0, fontWeight: FontWeight.w800),
         ),

@@ -10,7 +10,7 @@ class GetWeatherItemByLocationUseCaseImpl
 
   @override
   Future<WeatherItem> execute() async {
-    final weatherItem = await repository.getWeatherItem(37.55, 127);
+    final weatherItem = await repository.getWeatherItem(57.0370964,9.931149699999999);
 
     return weatherItem;
   }
