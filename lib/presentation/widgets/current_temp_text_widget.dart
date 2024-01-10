@@ -10,12 +10,12 @@ class CurrentTempTextWidget extends StatelessWidget {
         Text(
           '현재 온도',
           style: TextStyle(
-              color: Colors.black, fontSize: 35.0, fontWeight: FontWeight.w800),
+              color: Colors.black, fontSize: 35.0, fontWeight: FontWeight.w500),
         ),
         Text(
           '-2',
           style: TextStyle(
-              color: Colors.black, fontSize: 40.0, fontWeight: FontWeight.w800),
+              color: Colors.black, fontSize: 50.0, fontWeight: FontWeight.w800),
         ),
       ],
     );

@@ -5,8 +5,17 @@ class WeatherIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
-      child: Image.network('https://openweathermap.org/img/wn/01d@2x.png')
+    return Container(
+      decoration: BoxDecoration(
+        color: Color(0xffAEE1E1),
+        borderRadius: BorderRadius.circular(30)
+      ),
+        child: Image.network(
+      'https://openweathermap.org/img/wn/02d@2x.png',
+          width: 200,
+          height: 200,
+          fit: BoxFit.cover,
+      )
     );
   }
 }

@@ -13,6 +13,7 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Color(0xffE3FDFD),
         body: SizedBox(
           width: double.infinity,
           height: double.infinity,
