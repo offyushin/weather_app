@@ -52,6 +52,11 @@ class WeatherItem {
     }
     return map;
   }
+
+  @override
+  String toString() {
+    return 'WeatherItem{latitude: $latitude, longitude: $longitude, generationtimeMs: $generationtimeMs, utcOffsetSeconds: $utcOffsetSeconds, timezone: $timezone, timezoneAbbreviation: $timezoneAbbreviation, elevation: $elevation, hourlyUnits: $hourlyUnits, hourly: $hourly}';
+  }
 }
 
 class Hourly {
@@ -97,6 +102,11 @@ class Hourly {
     map['pressure_msl'] = pressureMsl;
     return map;
   }
+
+  @override
+  String toString() {
+    return 'Hourly{time: $time, temperature2m: $temperature2m, weathercode: $weathercode, relativehumidity2m: $relativehumidity2m, windspeed10m: $windspeed10m, pressureMsl: $pressureMsl}';
+  }
 }
 
 class HourlyUnits {
@@ -134,5 +144,10 @@ class HourlyUnits {
     map['windspeed_10m'] = windspeed10m;
     map['pressure_msl'] = pressureMsl;
     return map;
+  }
+
+  @override
+  String toString() {
+    return 'HourlyUnits{time: $time, temperature2m: $temperature2m, weathercode: $weathercode, relativehumidity2m: $relativehumidity2m, windspeed10m: $windspeed10m, pressureMsl: $pressureMsl}';
   }
 }
