@@ -1,84 +1,138 @@
 class WeatherItem {
-  final String time;
-  final num temperature_2m;
-  final int weathercode;
-  final int relativehumidity_2m;
-  final num windspeed_10m;
-
-//<editor-fold desc="Data Methods">
-  const WeatherItem({
-    required this.time,
-    required this.temperature_2m,
-    required this.weathercode,
-    required this.relativehumidity_2m,
-    required this.windspeed_10m,
+  WeatherItem({
+    this.latitude,
+    this.longitude,
+    this.generationtimeMs,
+    this.utcOffsetSeconds,
+    this.timezone,
+    this.timezoneAbbreviation,
+    this.elevation,
+    this.hourlyUnits,
+    this.hourly,
   });
 
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) ||
-      (other is WeatherItem &&
-          runtimeType == other.runtimeType &&
-          time == other.time &&
-          temperature_2m == other.temperature_2m &&
-          weathercode == other.weathercode &&
-          relativehumidity_2m == other.relativehumidity_2m &&
-          windspeed_10m == other.windspeed_10m);
-
-  @override
-  int get hashCode =>
-      time.hashCode ^
-      temperature_2m.hashCode ^
-      weathercode.hashCode ^
-      relativehumidity_2m.hashCode ^
-      windspeed_10m.hashCode;
-
-  @override
-  String toString() {
-    return 'WeatherItem{' +
-        ' time: $time,' +
-        ' temperature_2m: $temperature_2m,' +
-        ' weathercode: $weathercode,' +
-        ' relativehumidity_2m: $relativehumidity_2m,' +
-        ' windspeed_10m: $windspeed_10m,' +
-        '}';
+  WeatherItem.fromJson(dynamic json) {
+    latitude = json['latitude'];
+    longitude = json['longitude'];
+    generationtimeMs = json['generationtime_ms'];
+    utcOffsetSeconds = json['utc_offset_seconds'];
+    timezone = json['timezone'];
+    timezoneAbbreviation = json['timezone_abbreviation'];
+    elevation = json['elevation'];
+    hourlyUnits = json['hourly_units'] != null
+        ? HourlyUnits.fromJson(json['hourly_units'])
+        : null;
+    hourly = json['hourly'] != null ? Hourly.fromJson(json['hourly']) : null;
   }
 
-  WeatherItem copyWith({
-    String? time,
-    num? temperature_2m,
-    int? weathercode,
-    int? relativehumidity_2m,
-    num? windspeed_10m,
-  }) {
-    return WeatherItem(
-      time: time ?? this.time,
-      temperature_2m: temperature_2m ?? this.temperature_2m,
-      weathercode: weathercode ?? this.weathercode,
-      relativehumidity_2m: relativehumidity_2m ?? this.relativehumidity_2m,
-      windspeed_10m: windspeed_10m ?? this.windspeed_10m,
-    );
+  num? latitude;
+  num? longitude;
+  num? generationtimeMs;
+  num? utcOffsetSeconds;
+  String? timezone;
+  String? timezoneAbbreviation;
+  num? elevation;
+  HourlyUnits? hourlyUnits;
+  Hourly? hourly;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['latitude'] = latitude;
+    map['longitude'] = longitude;
+    map['generationtime_ms'] = generationtimeMs;
+    map['utc_offset_seconds'] = utcOffsetSeconds;
+    map['timezone'] = timezone;
+    map['timezone_abbreviation'] = timezoneAbbreviation;
+    map['elevation'] = elevation;
+    if (hourlyUnits != null) {
+      map['hourly_units'] = hourlyUnits?.toJson();
+    }
+    if (hourly != null) {
+      map['hourly'] = hourly?.toJson();
+    }
+    return map;
+  }
+}
+
+class Hourly {
+  Hourly({
+    this.time,
+    this.temperature2m,
+    this.weathercode,
+    this.relativehumidity2m,
+    this.windspeed10m,
+    this.pressureMsl,
+  });
+
+  Hourly.fromJson(dynamic json) {
+    time = json['time'] != null ? json['time'].cast<String>() : [];
+    temperature2m = json['temperature_2m'] != null
+        ? json['temperature_2m'].cast<num>()
+        : [];
+    weathercode =
+        json['weathercode'] != null ? json['weathercode'].cast<num>() : [];
+    relativehumidity2m = json['relativehumidity_2m'] != null
+        ? json['relativehumidity_2m'].cast<num>()
+        : [];
+    windspeed10m =
+        json['windspeed_10m'] != null ? json['windspeed_10m'].cast<num>() : [];
+    pressureMsl =
+        json['pressure_msl'] != null ? json['pressure_msl'].cast<num>() : [];
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'time': this.time,
-      'temperature_2m': this.temperature_2m,
-      'weathercode': this.weathercode,
-      'relativehumidity_2m': this.relativehumidity_2m,
-      'windspeed_10m': this.windspeed_10m,
-    };
+  List<String>? time;
+  List<num>? temperature2m;
+  List<num>? weathercode;
+  List<num>? relativehumidity2m;
+  List<num>? windspeed10m;
+  List<num>? pressureMsl;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['time'] = time;
+    map['temperature_2m'] = temperature2m;
+    map['weathercode'] = weathercode;
+    map['relativehumidity_2m'] = relativehumidity2m;
+    map['windspeed_10m'] = windspeed10m;
+    map['pressure_msl'] = pressureMsl;
+    return map;
+  }
+}
+
+class HourlyUnits {
+  HourlyUnits({
+    this.time,
+    this.temperature2m,
+    this.weathercode,
+    this.relativehumidity2m,
+    this.windspeed10m,
+    this.pressureMsl,
+  });
+
+  HourlyUnits.fromJson(dynamic json) {
+    time = json['time'];
+    temperature2m = json['temperature_2m'];
+    weathercode = json['weathercode'];
+    relativehumidity2m = json['relativehumidity_2m'];
+    windspeed10m = json['windspeed_10m'];
+    pressureMsl = json['pressure_msl'];
   }
 
-  factory WeatherItem.fromMap(Map<String, dynamic> map) {
-    return WeatherItem(
-      time: map['time'] as String,
-      temperature_2m: map['temperature_2m'] as num,
-      weathercode: map['weathercode'] as int,
-      relativehumidity_2m: map['relativehumidity_2m'] as int,
-      windspeed_10m: map['windspeed_10m'] as num,
-    );
-  }
+  String? time;
+  String? temperature2m;
+  String? weathercode;
+  String? relativehumidity2m;
+  String? windspeed10m;
+  String? pressureMsl;
 
-//</editor-fold>
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['time'] = time;
+    map['temperature_2m'] = temperature2m;
+    map['weathercode'] = weathercode;
+    map['relativehumidity_2m'] = relativehumidity2m;
+    map['windspeed_10m'] = windspeed10m;
+    map['pressure_msl'] = pressureMsl;
+    return map;
+  }
 }
